@@ -32,12 +32,16 @@ const u = (id: string, w = 1800) =>
 
 export const images = {
   homeHero: {
-    src: u("photo-1600880292203-757bb62b4baf", 2000),
-    alt: "Two business partners reviewing documents together at a desk",
+    src: u("photo-1517048676732-d65bc937f952", 2200),
+    alt: "Colleagues taking notes side by side around a long meeting table",
+  },
+  homeBelief: {
+    src: u("photo-1460574283810-2aab119d8511", 1400),
+    alt: "Repeating white concrete balconies rising up a modern building",
   },
   homeFull: {
-    src: u("photo-1552664730-d307ca884978", 2000),
-    alt: "A team collaborating in front of a wall of sticky notes",
+    src: u("photo-1521791136064-7986c2920216", 2000),
+    alt: "Two people shaking hands across a desk after a meeting",
   },
   aboutHero: {
     src: u("photo-1497366754035-f200968a6e72", 2000),
@@ -47,17 +51,37 @@ export const images = {
     src: u("photo-1521737604893-d14cc237f11d", 1400),
     alt: "Colleagues collaborating around a shared workspace",
   },
+  aboutBand: {
+    src: u("photo-1559136555-9303baea8ebd", 1600),
+    alt: "A team working together in a bright loft office",
+  },
   servicesHero: {
     src: u("photo-1454165804606-c3d57bc86b40", 2000),
     alt: "Team reviewing performance charts spread across a table",
+  },
+  servicesIntro: {
+    src: u("photo-1553877522-43269d4ea984", 1400),
+    alt: "A consultant working through analysis at a quiet desk",
   },
   industriesHero: {
     src: u("photo-1504917595217-d4dc5ebe6122", 2000),
     alt: "Metalworker grinding steel, sparks flying across the workshop",
   },
+  industriesPlant: {
+    src: u("photo-1516937941344-00b4e0337589", 1600),
+    alt: "An industrial processing plant silhouetted under heavy sky",
+  },
   contactHero: {
-    src: u("photo-1486406146926-c627a92ad1ab", 2000),
-    alt: "Modern office tower photographed from below against the sky",
+    src: u("photo-1497366811353-6870744d04b2", 2000),
+    alt: "A glass-walled meeting room in a contemporary office",
+  },
+  contactAside: {
+    src: u("photo-1431540015161-0bf868a2d407", 1400),
+    alt: "An empty boardroom looking out over the city",
+  },
+  cta: {
+    src: u("photo-1486406146926-c627a92ad1ab", 1600),
+    alt: "Office towers rising against the sky, seen from street level",
   },
   teamFull: {
     src: u("photo-1531973576160-7125cd663d86", 2000),
@@ -125,6 +149,84 @@ export const home = {
     "Community impact",
     "Durable advantage",
   ],
+
+  stats: [
+    { value: "10", label: "Businesses in the target portfolio, held for the long term" },
+    { value: "$1.25M+", label: "Minimum annual revenue we look for in an acquisition" },
+    { value: "60+", label: "Client engagements led across sectors before founding A5" },
+    { value: "15+", label: "Years advising C-suite leaders through change" },
+  ],
+
+  differentiators: {
+    heading: "Not a fund. A permanent home for your company.",
+    lead: "Most buyers are working to a clock. We are not — which changes every decision that follows.",
+    items: [
+      {
+        name: "We hold, we don't flip",
+        body: "There is no fund life, no forced exit and no clock running down. We buy businesses we intend to own for decades, so the right decision and the profitable decision stay the same one.",
+      },
+      {
+        name: "Operators, not spectators",
+        body: "We have sat in the chair. Our team has led restructurings, go-to-market launches and operational turnarounds, and we stay hands-on long after the deal closes.",
+      },
+      {
+        name: "Your people keep their jobs",
+        body: "We acquire companies because of the teams inside them. Succession means continuity for your employees, your customers and the community your business supports.",
+      },
+      {
+        name: "Data-driven, not formulaic",
+        body: "We pair rigorous analysis with the unmeasurable judgement of the people who already know the business. Neither one is enough on its own.",
+      },
+      {
+        name: "Built for the community",
+        body: "When a good local business winds down, a community loses more than a storefront. Revitalising it keeps that value where it was created.",
+      },
+      {
+        name: "A fair, straightforward process",
+        body: "Clear criteria, direct answers and a defined timeline. You will know where you stand at every stage, and you will hear it from us directly.",
+      },
+    ],
+  },
+
+  partnership: {
+    heading: "Succession, handled with the care it deserves",
+    body: [
+      "Selling the company you built is rarely only a financial decision. It is a decision about the people who showed up for you, the customers who trusted you and the reputation you spent a career earning.",
+      "We structure transitions so that owners can step back on their own terms — with the option of a meaningful equity stake, a defined handover period and the confidence that what they built carries on.",
+    ],
+  },
+
+  faqHeading: "Questions owners ask us",
+  faqs: [
+    {
+      q: "What kind of businesses do you acquire?",
+      a: "B2B, distribution and services-based businesses generating between $350K and $650K in discretionary earnings, with at least $1.25M in annual revenue — ideally $1.5–3M. We look for physical assets or high-turn inventory, and consistent year-over-year sales growth of roughly 2–5% across the preceding three years.",
+    },
+    {
+      q: "Which industries are you focused on?",
+      a: "Consumer Services, Industrials, Distribution and Transportation. These are sectors where operational discipline compounds, demand is durable, and thoughtful technology investment still creates real advantage.",
+    },
+    {
+      q: "Where do you invest geographically?",
+      a: "Primarily the West Coast — ideally California, though we are open to Oregon and Washington. We also look at metro areas across the US, including Atlanta, Chicago, Los Angeles and Philadelphia.",
+    },
+    {
+      q: "How long will I need to stay involved after the sale?",
+      a: "We ask sellers to train the incoming team for no less than 60 days. Many owners choose to stay longer, and some retain a meaningful equity stake and continue to grow the business alongside us. The right arrangement depends on what you want your next chapter to look like.",
+    },
+    {
+      q: "Are you going to break up the business or cut the team?",
+      a: "No. We acquire companies precisely because of what is already working inside them — the people, the customer relationships and the operating knowledge. Our aim is to invest behind that, not strip it out.",
+    },
+    {
+      q: "How are you different from private equity?",
+      a: "A private equity fund has a defined life and must return capital to its investors, which forces an exit whether or not it is the right moment for the company. We are a long-term holding company with no such clock, so we can let good decisions mature.",
+    },
+    {
+      q: "What does the process look like from here?",
+      a: "It starts with a conversation — no materials required. If there is a fit, we move through assessment and alignment before any offer is made, so that both sides understand the business and each other well before terms are discussed.",
+    },
+  ],
 } as const;
 
 /* ----------------------------------------------------------------- About */
@@ -146,6 +248,24 @@ export const about = {
     "Sellers willing to train buyers for no less than 60 days",
     "Consistent YoY sales growth of ~2-5% for the preceding three years",
   ],
+  principles: {
+    heading: "What we believe",
+    lead: "Three convictions that shape how we buy, hold and operate.",
+    items: [
+      {
+        name: "Patience is an advantage",
+        body: "Great companies are not built in quarters. A holding period measured in decades lets good decisions mature instead of being cut short by a fund's timetable.",
+      },
+      {
+        name: "Prosperity should be shared",
+        body: "We aspire to be a leading force in shaping a future where economic prosperity benefits all — starting with the employees and communities of the businesses we acquire.",
+      },
+      {
+        name: "Legacy is the real asset",
+        body: "The balance sheet records what a business owns. The legacy records what it meant. We take both seriously.",
+      },
+    ],
+  },
   geography:
     "Specifically, we are seeking businesses who meet the above criteria and have owners who are interested in transitioning and growing an existing business with a meaningful equity stake in exchange for our expertise. We are primarily interested in the metro areas throughout the US, including in and around Atlanta, GA, Chicago, IL, Los Angeles, CA, and Philadelphia, PA.",
   team: [
@@ -179,6 +299,37 @@ export const services = {
     lead:
       "Deep industry and functional expertise applied to the challenges that decide whether a business compounds or stalls.",
   },
+  intro: {
+    heading: "Expertise applied where it changes the outcome",
+    body: [
+      "We work closely with clients to embrace a transformational approach aimed at benefiting all stakeholders — empowering organizations to grow, build sustainable competitive advantage, and drive positive societal impact.",
+      "Our experts bring deep industry and functional expertise and a range of perspectives that question the status quo and spark change. We customize our support to your individual needs and concerns, rather than arriving with a template.",
+    ],
+  },
+
+  approach: {
+    heading: "How an engagement runs",
+    lead: "Four stages, deliberately sequenced. We do not skip to recommendations before we understand the business.",
+    steps: [
+      {
+        name: "Listen",
+        body: "We start with the owner's ambitions, the company's history and what must never be lost.",
+      },
+      {
+        name: "Diagnose",
+        body: "Data and stakeholder perspective together, until the real constraint is clear rather than the obvious one.",
+      },
+      {
+        name: "Design",
+        body: "A practical plan with sequencing, owners and measures — built to be executed, not presented.",
+      },
+      {
+        name: "Deliver",
+        body: "We work alongside management through implementation, and stay until the change holds.",
+      },
+    ],
+  },
+
   items: [
     {
       name: "Strategy",
@@ -241,23 +392,79 @@ export const industries = {
       name: "Consumer Services",
       body:
         "Businesses that provide goods or services to consumers or businesses. Demand is often driven by consumer spending. Profitability of these companies depends on efficient operations and favorable locations.",
+      detail:
+        "Location, scheduling and service consistency decide the margin in these businesses. We invest in the systems that make a good operator repeatable — routing, staffing, pricing and retention — so that quality no longer depends on the owner being in the building.",
+      signals: ["Repeat customers", "Favourable locations", "Efficient service delivery"],
+      image: {
+        src: u("photo-1606836576983-8b458e75221d", 1400),
+        alt: "A warm, empty café interior set up for the day's service",
+      },
     },
     {
       name: "Industrial",
       body:
         "Companies that make and sell machinery, equipment, and supplies that are used to produce other goods, namely in manufacturing, resource extraction, and construction.",
+      detail:
+        "Specialised products and deep technical knowledge create genuinely defensible positions. Our focus is throughput and reliability: tightening production planning, maintenance and quality so capacity is freed without capital being spent.",
+      signals: ["Specialised products", "Physical assets", "Technical know-how"],
+      image: {
+        src: u("photo-1581091226825-a6a2a5aee158", 1400),
+        alt: "An engineer operating automated machinery on a production line",
+      },
     },
     {
       name: "Distribution",
       body:
         "The essential link in the supply chain, connecting manufacturing companies and suppliers with various businesses, contractors, institutions, retailers, and now increasingly consumers directly.",
+      detail:
+        "Distribution rewards the operator who knows their inventory best. We back better demand planning, supplier terms and warehouse economics — the levers that turn working capital into cash without losing service levels.",
+      signals: ["High-turn inventory", "Supplier relationships", "Service reliability"],
+      image: {
+        src: u("photo-1586528116311-ad8dd3c8310d", 1400),
+        alt: "Shelved inventory stretching down a distribution warehouse aisle",
+      },
     },
     {
       name: "Transportation",
       body:
         "Companies that provide services to move people or goods. This includes receiving, storing, and distributing goods to stores and to customers.",
+      detail:
+        "Fleet utilisation, route density and maintenance discipline separate a good transport business from a fragile one. These are measurable problems, and measurable problems respond well to patient investment.",
+      signals: ["Fleet assets", "Route density", "Recurring contracts"],
+      image: {
+        src: u("photo-1601584115197-04ecc0da31d7", 1400),
+        alt: "A freight truck travelling an open highway at speed",
+      },
     },
   ],
+
+  criteria: {
+    heading: "What makes a business a fit",
+    lead: "Sector matters less than shape. Across all four verticals we are looking for the same underlying characteristics.",
+    items: [
+      {
+        name: "Durable demand",
+        body: "Customers who come back because they need to, not because of a promotion. Recurring revenue and contracted work are the clearest signal.",
+      },
+      {
+        name: "Real assets",
+        body: "Property, equipment, vehicles or high-turn inventory. Something tangible underpinning the balance sheet, not just goodwill.",
+      },
+      {
+        name: "Room to professionalise",
+        body: "A business that has grown on instinct and relationships, where basic systems and reporting would unlock a step change.",
+      },
+      {
+        name: "An owner ready for the next chapter",
+        body: "Someone who cares where the business lands, is willing to hand over properly, and wants the team to be looked after.",
+      },
+    ],
+  },
+
+  plant: {
+    heading: "Essential businesses, patiently run",
+    body: "These are not glamorous industries, and that is exactly the point. They are the companies communities depend on — the ones that keep shelves stocked, sites running and services delivered. Owned well and invested in steadily, they compound.",
+  },
   howWeWork: {
     heading: "HOW WE WORK",
     body:
@@ -278,4 +485,31 @@ export const contact = {
     emphasis: "together",
     lead: "Interested in working with us? Getting in touch has never been easier.",
   },
+  address: ["A5 Partners LLC", "2108 N Street, Suite N", "Sacramento, CA 95816"],
+  expectations: {
+    heading: "What happens next",
+    steps: [
+      {
+        name: "We read it ourselves",
+        body: "Your message goes straight to the team — not to a queue. No forms to fill in afterwards.",
+      },
+      {
+        name: "A real conversation",
+        body: "If there is a possible fit, we will set up a call. No materials or financials needed to start.",
+      },
+      {
+        name: "Clear answers either way",
+        body: "If it is not a fit, we will tell you plainly and explain why, so your time is not wasted.",
+      },
+    ],
+  },
+} as const;
+
+/* ---------------------------------------------------------- Shared CTA */
+
+export const cta = {
+  kicker: "Get in touch",
+  title: "Let’s build something",
+  emphasis: "enduring",
+  body: "Whether you are planning your succession or simply want to understand your options, a conversation costs nothing.",
 } as const;

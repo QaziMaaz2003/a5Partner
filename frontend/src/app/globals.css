@@ -295,8 +295,6 @@ a {
 
 .hero-section {
   position: relative;
-  height: 100svh;
-  min-height: 760px;
   color: var(--paper-bright);
   overflow: hidden;
 }
@@ -316,15 +314,26 @@ a {
   );
 }
 
+/* The hero fills the screen via the CONTENT's min-height rather than a fixed
+   height on the section. Effect: exactly one viewport tall in the normal case,
+   but free to grow instead of clipping when the viewport is very short (a
+   landscape phone). svh tracks the visible area as mobile URL bars collapse. */
 .hero-content {
   position: relative;
   z-index: 2; /* above the header scrim */
   display: flex;
   flex-direction: column;
   max-width: 1500px;
-  height: 100%;
+  min-height: 100svh;
   margin: auto;
-  padding: clamp(150px, 20vh, 220px) var(--gutter) 75px;
+  padding: clamp(104px, 17vh, 200px) var(--gutter) clamp(36px, 7vh, 72px);
+}
+
+/* Scale the headline against BOTH axes so it never overflows a short or
+   narrow viewport — the vh term is what makes the hero fit landscape phones
+   and small laptops. */
+.hero-content h1 {
+  font-size: clamp(38px, min(10.5vw, 13.5vh), 150px);
 }
 
 .hero-kicker {
@@ -343,13 +352,13 @@ a {
   margin-top: auto;
   /* Keeps the lead copy clear of the headline when the hero is short and
      `margin-top: auto` has no slack left to distribute. */
-  padding-top: 56px;
+  padding-top: clamp(22px, 5vh, 56px);
   animation: rise 1s 0.24s both;
 }
 
 .hero-bottom p {
   margin: 0;
-  font-size: 17px;
+  font-size: clamp(15px, 1.15vw, 17px);
   line-height: 1.7;
   color: color-mix(in oklab, var(--paper-bright) 82%, transparent);
 }
@@ -369,14 +378,41 @@ a {
   transform-origin: 100%;
 }
 
+/* Short viewports (landscape phones, small windows): tighten the hero's
+   vertical rhythm so it still resolves to a single screen. */
+@media (max-height: 620px) {
+  .hero-content {
+    padding-top: clamp(70px, 12.5vh, 120px);
+    padding-bottom: 16px;
+  }
+
+  .button-primary,
+  .button-dark,
+  .button-light,
+  .button-ghost {
+    padding: 12px 22px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(32px, min(9vw, 12.5vh), 90px);
+  }
+
+  .hero-bottom {
+    padding-top: 14px;
+  }
+
+  .hero-kicker {
+    font-size: 10px;
+  }
+}
+
 /* Compact hero for interior pages */
-.hero-section.hero-compact {
-  height: auto;
+.hero-section.hero-compact .hero-content {
   min-height: 74svh;
 }
 
 .hero-section.hero-compact h1 {
-  font-size: clamp(48px, 8.5vw, 124px);
+  font-size: clamp(40px, min(8.5vw, 11vh), 118px);
   line-height: 0.9;
 }
 
@@ -598,7 +634,13 @@ a {
 }
 
 .sector-list h3 {
-  font-size: 32px;
+  font-size: clamp(21px, 2.4vw, 32px);
+}
+
+/* Grid children default to min-width:auto, which refuses to shrink below the
+   heading's longest word and pushes the row past the viewport on small phones. */
+.sector-list article > * {
+  min-width: 0;
 }
 
 .sector-list p {
@@ -742,6 +784,224 @@ a {
 }
 
 /* ==========================================================================
+   Media split (image beside copy)
+   ========================================================================== */
+
+.media-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(40px, 6vw, 90px);
+}
+
+.media-split.is-reversed .media-split-copy {
+  order: 2;
+}
+
+.media-frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.media-frame.is-portrait {
+  aspect-ratio: 4 / 5;
+}
+
+.media-frame img {
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.media-frame:hover img {
+  transform: scale(1.04);
+}
+
+/* Thin cobalt rule that ties images back to the palette. */
+.media-frame::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 4px;
+  background: var(--cobalt);
+}
+
+/* ==========================================================================
+   Stat band
+   ========================================================================== */
+
+.stat-band {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: color-mix(in oklab, var(--paper-bright) 22%, transparent);
+  border: 1px solid color-mix(in oklab, var(--paper-bright) 22%, transparent);
+}
+
+.stat-band > div {
+  background: var(--cobalt);
+  padding: 38px 30px 42px;
+}
+
+.stat-value {
+  font-family: var(--font-dm-serif), "DM Serif Display", serif;
+  font-size: clamp(38px, 4vw, 58px);
+  line-height: 1;
+}
+
+.stat-label {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--paper-bright) 82%, transparent);
+}
+
+/* ==========================================================================
+   Feature grid (cards)
+   ========================================================================== */
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.feature-grid > article {
+  background: var(--paper-bright);
+  padding: 40px 34px 44px;
+  transition: background 0.25s;
+}
+
+.feature-grid > article:hover {
+  background: var(--paper);
+}
+
+.feature-grid h3 {
+  margin: 16px 0 12px;
+  font-size: 24px;
+}
+
+.feature-grid p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* ==========================================================================
+   FAQ
+   ========================================================================== */
+
+.faq-list {
+  border-top: 1px solid var(--border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-item summary {
+  display: grid;
+  grid-template-columns: 60px 1fr 30px;
+  align-items: center;
+  gap: 20px;
+  padding: 30px 0;
+  cursor: pointer;
+  list-style: none;
+  transition: padding 0.25s, background 0.25s;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary:hover {
+  background: var(--paper-bright);
+  padding-left: 18px;
+}
+
+.faq-q {
+  font-family: var(--font-dm-serif), "DM Serif Display", serif;
+  font-size: clamp(19px, 2vw, 26px);
+  line-height: 1.3;
+}
+
+.faq-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--cobalt);
+}
+
+.faq-sign {
+  justify-self: end;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--cobalt);
+  transition: transform 0.3s;
+}
+
+.faq-item[open] .faq-sign {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-width: 760px;
+  margin-left: 80px;
+  padding-bottom: 32px;
+  color: var(--muted-foreground);
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+/* ==========================================================================
+   Cobalt accent section
+   ========================================================================== */
+
+.accent-section {
+  background: var(--cobalt);
+  color: var(--paper-bright);
+}
+
+.accent-section .section-label span:first-child,
+.accent-section .eyebrow {
+  color: color-mix(in oklab, var(--paper-bright) 75%, transparent);
+}
+
+.accent-section em {
+  color: var(--ink);
+}
+
+.accent-section p {
+  color: color-mix(in oklab, var(--paper-bright) 88%, transparent);
+}
+
+/* Cards sitting on cobalt keep their light surface, so their text must stay
+   dark — otherwise the rule above renders white-on-white. */
+.accent-section .value-grid,
+.accent-section .feature-grid {
+  background: color-mix(in oklab, var(--paper-bright) 35%, transparent);
+  border-color: color-mix(in oklab, var(--paper-bright) 35%, transparent);
+}
+
+.accent-section .value-grid > article,
+.accent-section .feature-grid > article {
+  background: var(--paper-bright);
+}
+
+.accent-section .value-grid h3,
+.accent-section .feature-grid h3 {
+  color: var(--ink);
+}
+
+.accent-section .value-grid p,
+.accent-section .feature-grid p {
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
    Contact
    ========================================================================== */
 
@@ -754,6 +1014,43 @@ a {
   margin: 35px 0 90px;
   font-size: clamp(54px, 10vw, 145px);
   line-height: 0.86;
+}
+
+/* CTA variant: headline beside an image */
+.cta-split {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: clamp(40px, 5vw, 80px);
+}
+
+.cta-split h2 {
+  margin: 30px 0 40px;
+  font-size: clamp(46px, 6.5vw, 96px);
+  line-height: 0.92;
+}
+
+.cta-image {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+}
+
+.cta-image img {
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.cta-image:hover img {
+  transform: scale(1.05);
+}
+
+.cta-image::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 4px;
+  background: var(--cobalt);
 }
 
 .contact-section h2 em {
@@ -982,9 +1279,21 @@ a {
   .focus-intro,
   .partnership-section,
   .contact-bottom,
-  .people-section {
+  .people-section,
+  .media-split,
+  .cta-split {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  /* Keep the image below the copy once stacked, whichever side it was on. */
+  .media-split.is-reversed .media-split-copy {
+    order: 0;
+  }
+
+  .stat-band,
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .people-section {
@@ -1014,17 +1323,13 @@ a {
     display: flex;
   }
 
-  .hero-section {
-    min-height: 720px;
-  }
-
-  .hero-content {
-    padding-bottom: 70px;
-  }
-
   .hero-bottom {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
+  }
+
+  .hero-bottom .cta-row {
+    justify-content: flex-start;
   }
 
   .scroll-cue {
@@ -1047,6 +1352,15 @@ a {
   .image-caption {
     bottom: 40px;
     right: var(--gutter);
+  }
+
+  .faq-item summary {
+    grid-template-columns: 38px 1fr 24px;
+    gap: 14px;
+  }
+
+  .faq-answer {
+    margin-left: 52px;
   }
 }
 
@@ -1073,6 +1387,11 @@ a {
   .footer-bottom {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .stat-band,
+  .feature-grid {
+    grid-template-columns: 1fr;
   }
 
   .contact-section h2 {

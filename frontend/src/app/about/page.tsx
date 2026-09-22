@@ -83,10 +83,56 @@ export default function AboutPage() {
         </p>
       </section>
 
-      {/* 03 — Our team */}
+      {/* 03 — What we believe (cobalt) */}
+      <section className="accent-section section-pad">
+        <div className="process-head" data-reveal>
+          <div>
+            <SectionLabel num="03">Principles</SectionLabel>
+            <h2>{about.principles.heading}</h2>
+          </div>
+          <p style={{ margin: 0, fontSize: 17, lineHeight: 1.8 }}>
+            {about.principles.lead}
+          </p>
+        </div>
+
+        <div className="feature-grid" data-reveal>
+          {about.principles.items.map((item, i) => (
+            <article key={item.name}>
+              <span className="eyebrow" style={{ color: "var(--cobalt)" }}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3>{item.name}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Full-bleed image */}
+      <section className="full-image-section">
+        <Image
+          src={images.aboutBand.src}
+          alt={images.aboutBand.alt}
+          fill
+          sizes="100vw"
+          style={{ objectFit: "cover" }}
+        />
+        <div className="image-scrim" aria-hidden="true" />
+        <div className="image-caption">
+          <span className="eyebrow" style={{ color: "var(--cobalt)" }}>
+            Our people
+          </span>
+          <p style={{ marginTop: 14, fontSize: 19, lineHeight: 1.6 }}>
+            Deep expertise from global technology, financial services, industrial and
+            consumer sectors — applied locally.
+          </p>
+        </div>
+      </section>
+
+      {/* 04 — Our team */}
       <section className="people-section section-pad">
         <div data-reveal>
-          <SectionLabel num="03">Our team</SectionLabel>
+          <SectionLabel num="04">Our team</SectionLabel>
           <h2>
             The people behind <em>A5</em>
           </h2>
@@ -120,7 +166,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <ContactCta num="04" />
+      <ContactCta num="05" />
     </>
   );
 }

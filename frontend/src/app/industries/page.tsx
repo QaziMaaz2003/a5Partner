@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import ContactCta from "@/components/ContactCta";
 import Hero from "@/components/Hero";
+import MediaSplit from "@/components/MediaSplit";
 import SectionLabel from "@/components/SectionLabel";
 import SectorList from "@/components/SectorList";
 import { images, industries } from "@/content/site";
@@ -41,6 +42,83 @@ export default function IndustriesPage() {
         <SectorList items={industries.items} />
       </section>
 
+      {/* Each sector in depth, alternating sides */}
+      {industries.items.map((sector, i) => (
+        <section
+          key={sector.name}
+          className="section-pad"
+          style={{
+            background: i % 2 === 0 ? "var(--paper-bright)" : "var(--paper)",
+            borderTop: "1px solid var(--border)",
+          }}
+        >
+          <MediaSplit image={sector.image} reversed={i % 2 === 1}>
+            <SectionLabel num={String(i + 1).padStart(2, "0")}>
+              {sector.name}
+            </SectionLabel>
+            <h2 style={{ marginBottom: 26 }}>{sector.name}</h2>
+            <p
+              style={{ color: "var(--muted-foreground)", fontSize: 17, lineHeight: 1.8 }}
+            >
+              {sector.body}
+            </p>
+            <p
+              style={{
+                color: "var(--muted-foreground)",
+                fontSize: 17,
+                lineHeight: 1.8,
+                marginTop: 16,
+              }}
+            >
+              {sector.detail}
+            </p>
+
+            <div
+              style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 30 }}
+            >
+              {sector.signals.map((signal) => (
+                <span
+                  key={signal}
+                  style={{
+                    padding: "9px 16px",
+                    border: "1px solid var(--cobalt)",
+                    color: "var(--cobalt)",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                  }}
+                >
+                  {signal}
+                </span>
+              ))}
+            </div>
+          </MediaSplit>
+        </section>
+      ))}
+
+      {/* 02 — What makes a business a fit (cobalt) */}
+      <section className="accent-section section-pad">
+        <div className="process-head" data-reveal>
+          <div>
+            <SectionLabel num="02">Fit</SectionLabel>
+            <h2>{industries.criteria.heading}</h2>
+          </div>
+          <p style={{ margin: 0, fontSize: 17, lineHeight: 1.8 }}>
+            {industries.criteria.lead}
+          </p>
+        </div>
+
+        <div className="value-grid" data-reveal>
+          {industries.criteria.items.map((item) => (
+            <article key={item.name}>
+              <h3>{item.name}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* Full-bleed image */}
       <section className="full-image-section">
         <Image
@@ -62,13 +140,26 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      {/* 02 — How we work */}
+      {/* 03 — Essential businesses */}
+      <section className="section-pad" style={{ background: "var(--paper-bright)" }}>
+        <MediaSplit image={images.industriesPlant} reversed>
+          <SectionLabel num="03">Why these sectors</SectionLabel>
+          <h2 style={{ marginBottom: 28 }}>{industries.plant.heading}</h2>
+          <p
+            style={{ color: "var(--muted-foreground)", fontSize: 17, lineHeight: 1.8 }}
+          >
+            {industries.plant.body}
+          </p>
+        </MediaSplit>
+      </section>
+
+      {/* 04 — How we work */}
       <section
         className="section-pad"
         style={{ background: "var(--ink)", color: "var(--paper-bright)" }}
       >
         <div className="statement-section" data-reveal>
-          <SectionLabel num="02">{industries.howWeWork.heading}</SectionLabel>
+          <SectionLabel num="04">{industries.howWeWork.heading}</SectionLabel>
           <div className="statement-copy">
             <p
               style={{
@@ -84,7 +175,7 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      <ContactCta num="03" />
+      <ContactCta num="05" />
     </>
   );
 }
