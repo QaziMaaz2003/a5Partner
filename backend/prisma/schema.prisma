@@ -1,0 +1,30 @@
+// A5 Partners — contact submission store.
+// Scope is intentionally small: the only dynamic feature on the site is the
+// contact form, so that is the only thing persisted here.
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+// Prisma 7: the connection URL lives in prisma.config.ts (for the CLI) and is
+// supplied to PrismaClient through a driver adapter at runtime.
+datasource db {
+  provider = "sqlite"
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  ipAddress String?
+  emailSent Boolean  @default(false)
+  emailError String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([email])
+}
