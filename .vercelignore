@@ -1,0 +1,4 @@
+# The NestJS API is not deployed by this Vercel project — it needs a
+# long-running server and a persistent database, which Vercel's serverless
+# runtime does not provide. Host it separately and point API_URL at it.
+backend/

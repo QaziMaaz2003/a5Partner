@@ -95,3 +95,42 @@ cd frontend
 npm run build           # production build
 npx eslint src          # lint
 ```
+
+## Deploying to Vercel
+
+This repo holds two apps, so Vercel cannot guess which one to build. The root
+`vercel.json` resolves that by pointing the install, build and output paths at
+`frontend/`. Importing the repo at <https://vercel.com/new> should now work with no
+extra configuration.
+
+If you prefer not to use `vercel.json`, the alternative is to set **Root Directory** to
+`frontend` on the import screen (Settings → General → Root Directory for an existing
+project). Either approach works; do not do both differently.
+
+`backend/` is excluded via `.vercelignore` — see below.
+
+### The contact form in production
+
+The Next.js route at `frontend/src/app/api/contact/route.ts` handles submissions two ways:
+
+| `API_URL` | Behaviour |
+| --------- | --------- |
+| **unset** | Validates in the route and emails via Resend. Nothing is stored. |
+| **set**   | Proxies to the NestJS API, which validates, stores and emails. |
+
+So a Vercel-only deploy works out of the box — just add `RESEND_API_KEY` (and
+`CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL`) in **Settings → Environment Variables**.
+Without a key the submission is logged server-side and the visitor still sees the
+success message, so nothing appears broken — but no email is sent and no record is
+kept. Set the key before going live.
+
+### Why the backend isn't on Vercel
+
+The NestJS API needs a long-running process and a persistent disk for SQLite. Vercel's
+serverless runtime provides neither — the filesystem is ephemeral, so stored submissions
+would vanish between invocations.
+
+To run the full stack, host `backend/` on a platform with persistent processes (Render,
+Railway, Fly.io), switch the Prisma datasource from `sqlite` to `postgresql`, then set
+`API_URL` on the Vercel project to that host. The frontend will switch to the proxy path
+automatically.
