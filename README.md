@@ -98,16 +98,24 @@ npx eslint src          # lint
 
 ## Deploying to Vercel
 
-This repo holds two apps, so Vercel cannot guess which one to build. The root
-`vercel.json` resolves that by pointing the install, build and output paths at
-`frontend/`. Importing the repo at <https://vercel.com/new> should now work with no
-extra configuration.
+This repo holds two apps, so Vercel needs to be told which one to build. That has to be
+the **Root Directory** project setting — a `vercel.json` at the repo root is not enough,
+because Vercel's framework detection scans the actual repo root for a `package.json`
+*before* it reads any custom install/build commands, and fails with "No Next.js version
+detected" when it finds none there.
 
-If you prefer not to use `vercel.json`, the alternative is to set **Root Directory** to
-`frontend` on the import screen (Settings → General → Root Directory for an existing
-project). Either approach works; do not do both differently.
+**On import** (<https://vercel.com/new>): after selecting this repo, open **Root
+Directory** and set it to `frontend` before deploying.
 
-`backend/` is excluded via `.vercelignore` — see below.
+**On an existing project**: Settings → General → Root Directory → `frontend` → Save,
+then redeploy (Deployments tab → latest → ⋯ → Redeploy — changing the setting alone does
+not trigger a new build).
+
+With Root Directory set to `frontend`, Vercel finds `frontend/package.json`, detects
+Next.js automatically, and needs no `vercel.json` at all.
+
+`backend/` is excluded via `.vercelignore` (evaluated at the repo root regardless of
+Root Directory) — see below.
 
 ### The contact form in production
 
