@@ -206,9 +206,24 @@ a {
 }
 
 .header-mark {
-  font-family: var(--font-dm-serif), "DM Serif Display", serif;
-  font-size: 22px;
-  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Full wordmark by default; swapped for the mark-only logo once the header
+   collapses to the mobile burger layout (see the 860px breakpoint below) —
+   the full lockup is too wide for that width. */
+.logo-full {
+  display: block;
+  height: 34px;
+  width: auto;
+}
+
+.logo-mark {
+  display: none;
+  height: 38px;
+  width: auto;
 }
 
 .header-nav {
@@ -1181,9 +1196,12 @@ a {
 }
 
 .footer-mark {
+  display: inline-block;
   align-self: start;
-  font-family: var(--font-dm-serif), "DM Serif Display", serif;
-  font-size: 30px;
+}
+
+.footer-mark img {
+  display: block;
 }
 
 .footer-links {
@@ -1321,6 +1339,14 @@ a {
 
   .header-burger {
     display: flex;
+  }
+
+  .logo-full {
+    display: none;
+  }
+
+  .logo-mark {
+    display: block;
   }
 
   .hero-bottom {

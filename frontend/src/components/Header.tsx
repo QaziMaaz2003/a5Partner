@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -38,7 +39,25 @@ export default function Header() {
         data-theme={!overHero && !scrolled && !open ? "light" : undefined}
       >
         <Link href="/" className="header-mark" aria-label={`${site.name} home`}>
-          A5 <span style={{ opacity: 0.55 }}>Partners</span>
+          {/* Full wordmark where the header has room; the mark alone once it
+              collapses to the mobile burger layout. Swapped by CSS, not JS,
+              so there's no layout flash while hydrating. */}
+          <Image
+            src="/a5-logo-full.png"
+            alt={site.name}
+            width={180}
+            height={40}
+            priority
+            className="logo-full"
+          />
+          <Image
+            src="/a5-logo-mark.png"
+            alt={site.name}
+            width={52}
+            height={42}
+            priority
+            className="logo-mark"
+          />
         </Link>
 
         <nav className="header-nav" aria-label="Primary">

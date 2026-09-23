@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { legalNav, nav, site } from "@/content/site";
 
@@ -6,9 +7,9 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-grid">
         <div>
-          <div className="footer-mark">
-            A5 <span style={{ opacity: 0.55 }}>Partners</span>
-          </div>
+          <Link href="/" className="footer-mark" aria-label={`${site.name} home`}>
+            <Image src="/a5-logo-full.png" alt={site.name} width={189} height={42} />
+          </Link>
           <p
             style={{
               maxWidth: 320,
